@@ -3,12 +3,12 @@ import Main from '../template/Main';
 
 const headerProps = {
 	icon: 'tools',
-	title: 'Nome',
+	title: 'Ferramentas',
 	subtitle: 'Cadastro de ferramentas: Incluir, Listar, Alterar e Excluir.',
 };
 
 export default class ToolsCrud extends Component {
-	rebder() {
+	render() {
 		return <Main {...headerProps}>Cadastro de Ferramentas</Main>;
 	}
 }
