@@ -6,9 +6,7 @@ import React from 'react';
 export default (props) => (
 	<footer className="footer">
 		<span>
-			Trabalho desenvolvido utilizando  <i className="fab fa-js-square cjs"></i>{'  '}
-			<i className="fab fa-node cnode"></i>  <i className="fab fa-react creact"></i>  para a
-			disciplina de Projetos Integrados.
+			Trabalho desenvolvido para a disciplina de Projetos Integrados.
 		</span>
 	</footer>
 );
