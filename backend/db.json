@@ -1,8 +1,16 @@
 {
-    "tools":[{
-        "id": 1,
-        "name": "IBExpert",
-        "description":"SGDB used to manage Firebird databases",
-        "usage":"DBA"
-    }]
+  "tools": [
+    {
+      "id": 1,
+      "name": "IBExpert",
+      "description": "SGDB used to manage Firebird databases",
+      "usage": "DBA"
+    },
+    {
+      "name": "SoapUI",
+      "description": "Teste de Webservice",
+      "usage": "API",
+      "id": 2
+    }
+  ]
 }
