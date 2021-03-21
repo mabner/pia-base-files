@@ -17,6 +17,13 @@ const initialState = {
 export default class ToolsCrud extends Component {
 	state = { ...initialState };
 
+	// Function will be called when the component is to be shown in the screen
+	componentWillMount() {
+		axios(baseUrl).then((resp) => {
+			this.setState({ list: resp.data });
+		});
+	}
+
 	// Clears the form
 	clear() {
 		this.setState({ tools: initialState.tools });
@@ -38,9 +45,9 @@ export default class ToolsCrud extends Component {
 		});
 	}
 
-	getUpdatedList(tools) {
+	getUpdatedList(tools, add = true) {
 		const list = this.state.list.filter((t) => t.id !== tools.id);
-		list.unshift(tools);
+		if (add) list.unshift(tools);
 		return list;
 	}
 
@@ -51,8 +58,7 @@ export default class ToolsCrud extends Component {
 		this.setState({ tools });
 	}
 
-	renderForm ()
-	{
+	renderForm() {
 		return (
 			<div className="form">
 				<div className="row">
@@ -100,7 +106,8 @@ export default class ToolsCrud extends Component {
 				<div className="row">
 					<div className="col-12 d-flex justify-content-end">
 						<button
-							className="btn btn-primary"
+							className="btn btn-success"
+							// @ts-ignore
 							onClick={(event) => this.save(event)}
 						>
 							Salvar
@@ -108,6 +115,7 @@ export default class ToolsCrud extends Component {
 
 						<button
 							className="btn btn-secondary ml-2"
+							// @ts-ignore
 							onClick={(event) => this.clear(event)}
 						>
 							Cancelar
@@ -116,22 +124,66 @@ export default class ToolsCrud extends Component {
 				</div>
 			</div>
 		);
+	}
 
+	// Updates the tools state
+	load(tools) {
+		this.setState({ tools });
+	}
+
+	remove(tools) {
+		// @ts-ignore
+		axios.delete(`${baseUrl}/${tools.id}`).then((resp) => {
+			const list = this.getUpdatedList(tools, false);
+			this.setState({ list });
+		});
 	}
 
 	renderTable ()
 	{
-
+		return (
+			<table className="table mt-4">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Descrição</th>
+						<th>Tema</th>
+					</tr>
+				</thead>
+				<tbody>{this.renderRow()}</tbody>
+			</table>
+		);
 	}
 
 	renderRow ()
 	{
-
+		return this.state.list.map( tools =>
+		{
+			return (
+				<tr key={tools.id}>
+					<td>{tools.name}</td>
+					<td>{tools.description}</td>
+					<td>{tools.usage}</td>
+					<td>
+						<button className="btn btn-warning"
+						onClick={() => this.load(tools)}>
+							<i className="fas fa-pencil-alt"></i>
+						</button>
+						<button className="btn btn-danger ml-2"
+						onClick={() => this.remove(tools)}>
+							<i className="fas fa-trash"></i>
+						</button>
+					</td>
+				</tr>
+			);
+		})
 	}
 
 	render() {
-		return <Main { ...headerProps }>
-			{this.renderForm()}
-		</Main>;
+		return (
+		<Main {...headerProps}>
+				{this.renderForm() }
+				{this.renderTable()}
+		</Main>);
 	}
 }

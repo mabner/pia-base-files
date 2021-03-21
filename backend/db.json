@@ -3,12 +3,12 @@
     {
       "id": 1,
       "name": "IBExpert",
-      "description": "SGDB used to manage Firebird databases",
+    "description": "SGDB para banco de dados Firebird",
       "usage": "DBA"
     },
     {
-      "name": "SoapUI",
-      "description": "Teste de Webservice",
+    "name": "Postman",
+    "description": "Teste de API Rest",
       "usage": "API",
       "id": 2
     }
