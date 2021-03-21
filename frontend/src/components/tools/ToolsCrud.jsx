@@ -44,6 +44,19 @@ export default class ToolsCrud extends Component {
 		return list;
 	}
 
+	updateField(event) {
+		// Clones the tool with a spread operator
+		const tools = { ...this.state.tools };
+		tools[event.target.name] = event.target.value;
+		this.setState({ tools });
+	}
+
+	renderForm() {}
+
+	renderTable() {}
+
+	renderRow() {}
+
 	render() {
 		return <Main {...headerProps}>Cadastro de Ferramentas</Main>;
 	}
